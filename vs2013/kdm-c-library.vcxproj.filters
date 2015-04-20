@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="소스 파일">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="헤더 파일">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="리소스 파일">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="소스 파일\library">
+      <UniqueIdentifier>{0c2d4719-60b2-4100-bdd2-741c9d77610f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\autotest">
+      <UniqueIdentifier>{316fdb0b-6050-40d5-954b-ba94422ed7f5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="헤더 파일\library">
+      <UniqueIdentifier>{8950af67-8426-458e-8fb1-2083c0eb9a65}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="헤더 파일\autotest">
+      <UniqueIdentifier>{5de5ea06-3abb-4358-8dca-21256c5632e9}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\src\kdm-main.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\autotest\array2d-test.cpp">
+      <Filter>소스 파일\autotest</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\src\kdm-main.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\autotest\autotest-util.h">
+      <Filter>헤더 파일\autotest</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\autotest\array2d-test.h">
+      <Filter>헤더 파일\autotest</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\library\array2d.h">
+      <Filter>헤더 파일\library</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\library\array2d.hpp">
+      <Filter>소스 파일\library</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
