@@ -27,6 +27,13 @@ CKDMArray2D<T>::CKDMArray2D(p_nRow, p_nCol)
 }
 
 template<typename T>
+CKDMArray2D<T>::
+CKDMArray2D(const CKDMArray2D &p_src) :
+CKDMArray2D<T>::CKDMArray2D(p_src.m_nRow, p_src.m_nCol){
+	memcpy(this->m_tArray, p_src.m_tArray, m_nTotalSize);
+}
+
+template<typename T>
 T& CKDMArray2D<T>::operator()(int p_iRow, int p_iCol) {
 	try{
 		isValidRange(p_iRow, p_iCol);

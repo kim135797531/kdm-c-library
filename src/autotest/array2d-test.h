@@ -8,6 +8,7 @@ public:
 	bool testDoublePtr();
 	bool testSinglePtr();
 	bool testVectorPtr();
+	bool testCopyConstructor();
 private:
 };
 

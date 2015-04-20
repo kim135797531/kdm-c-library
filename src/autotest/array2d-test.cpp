@@ -8,9 +8,10 @@ bool CKDMArray2DTest::testAll(){
 		testDoublePtr();
 		testSinglePtr();
 		testVectorPtr();
+		testCopyConstructor();
 	}
-	catch(std::logic_error &e){
-		
+	catch (std::logic_error &e){
+
 		displayError(e.what());
 		return false;
 	}
@@ -86,5 +87,20 @@ bool CKDMArray2DTest::testVectorPtr(){
 		testInstance(1, 1) != cTestInput){
 		throw std::logic_error(TEST_FUNCTION_NAME);
 	}
+	return true;
+}
+
+bool CKDMArray2DTest::testCopyConstructor(){
+	CKDMArray2D<char> srcInstance = CKDMArray2D<char>(2, 2);
+	char cTestInput = 'a';
+	srcInstance(1, 1) = cTestInput;
+
+	CKDMArray2D<char> destInstance = CKDMArray2D<char>(srcInstance);
+
+	if (destInstance(1, 1) == NULL ||
+		destInstance(1, 1) != cTestInput){
+		throw std::logic_error(TEST_FUNCTION_NAME);
+	}
+
 	return true;
 }

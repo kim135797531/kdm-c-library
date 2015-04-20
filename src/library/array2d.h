@@ -39,6 +39,9 @@ public:
 	//벡터로 넘어왔을 경우
 	CKDMArray2D(int p_nRow, int p_nCol, std::vector<T>* p_tArray);
 
+	//복사 생성자
+	CKDMArray2D(const CKDMArray2D &p_src);
+
 	//소멸자
 	~CKDMArray2D(){
 		delete m_tArray;
@@ -56,6 +59,7 @@ public:
 			p_iRow*(this->m_nCol) +
 				p_iCol];
 	}
+
 
 private:
 	const int m_nRow;
