@@ -1,13 +1,19 @@
-﻿#include "kdm-main.h"
+﻿#include <vector>
+#include "kdm-main.h"
 #include "autotest/array2d-test.h"
 #include "autotest/bitwise-flag-test.h"
 
 /*테스팅 목적 메인 함수*/
 
 int main(void){
-	CKDMArray2DTest array2DTest;
-	CKDMBitwiseFlagTest bitwiseFlagTest;
-	array2DTest.testAll();
-	bitwiseFlagTest.testAll();
+	std::vector<CKDMAutotestBase*> vTestList;
+	vTestList.push_back(new CKDMArray2DTest());
+	vTestList.push_back(new CKDMBitwiseFlagTest());
+
+	for (unsigned int i = 0; i < vTestList.size(); i++){
+		vTestList.at(i)->testAll();
+		std::cout << std::endl;
+	}
+
 	return 0;
 }

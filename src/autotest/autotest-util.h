@@ -14,4 +14,10 @@ static void inline displaySuccess(const char* p_rgcInfo){
 	std::cout << "Test passed in " << p_rgcInfo << std::endl;
 };
 
+class CKDMAutotestBase{
+public:
+	virtual bool testAll() = 0;
+private:
+};
+
 #endif KDM_SRC_AUTOTEST_AUTOTEST_UTIL_H_

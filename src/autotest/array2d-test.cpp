@@ -1,5 +1,4 @@
 ﻿#include "../library/array2d.h"
-#include "autotest-util.h"
 #include "array2d-test.h"
 
 bool CKDMArray2DTest::testAll(){
@@ -31,6 +30,7 @@ bool CKDMArray2DTest::testSimple(){
 		throw std::logic_error(TEST_FUNCTION_NAME);
 	}
 
+	displaySuccess(TEST_FUNCTION_NAME);
 	return true;
 }
 
@@ -56,6 +56,7 @@ bool CKDMArray2DTest::testDoublePtr(){
 		throw std::logic_error(TEST_FUNCTION_NAME);
 	}
 
+	displaySuccess(TEST_FUNCTION_NAME);
 	return true;
 }
 
@@ -71,6 +72,7 @@ bool CKDMArray2DTest::testSinglePtr(){
 		throw std::logic_error(TEST_FUNCTION_NAME);
 	}
 
+	displaySuccess(TEST_FUNCTION_NAME);
 	return true;
 }
 
@@ -87,6 +89,8 @@ bool CKDMArray2DTest::testVectorPtr(){
 		testInstance(1, 1) != cTestInput){
 		throw std::logic_error(TEST_FUNCTION_NAME);
 	}
+
+	displaySuccess(TEST_FUNCTION_NAME);
 	return true;
 }
 
@@ -102,5 +106,6 @@ bool CKDMArray2DTest::testCopyConstructor(){
 		throw std::logic_error(TEST_FUNCTION_NAME);
 	}
 
+	displaySuccess(TEST_FUNCTION_NAME);
 	return true;
 }

@@ -1,5 +1,4 @@
 ﻿#include "../library/bitwise-flag.h"
-#include "autotest-util.h"
 #include "bitwise-flag-test.h"
 
 enum ETestFlagBit{
@@ -13,19 +12,6 @@ enum ETestFlagIndex{
 	FLAG_CHIHAYA = 7,
 	FLAG_MIKI = 15
 };
-
-/*
-//비트 마스크를 받을 것인가
--> get set 함수 비트마스크 제공
-
-//정수-개수에만 상관 있게 받을 것인가
--> 최대 크기 받기(기본값)
--> get set 함수 숫자 제공
-
-//정수-해당 정수 크기만큼 받을 것인가 <- enum 받아 최대값 확인
--> enum 받아 크기 확인
--> get set 함수 enum 제공
-*/
 
 bool CKDMBitwiseFlagTest::testAll(){
 	try{
@@ -43,10 +29,10 @@ bool CKDMBitwiseFlagTest::testAll(){
 }
 
 bool CKDMBitwiseFlagTest::testFlagSmallUnsignedChar(){
-	CKDMBitwiseFlagSmall* testInstance = new CKDMBitwiseFlagSmall();
-
+	CKDMBitwiseFlag* testInstance = CKDMBitwiseFlagFactory::createFlag(CKDMBitwiseFlagFactory::FLAG_SMALL);
+	
 	unsigned char test = FLAG_TEST_BIT_1 | FLAG_TEST_BIT_2;
-	testInstance->set(test);
+	testInstance->set(unsigned char(test), 0);
 
 	if (testInstance->check((unsigned char)FLAG_TEST_BIT_1) &&
 		testInstance->check((unsigned char)FLAG_TEST_BIT_2) == false){ //세팅 안 됐으면
@@ -64,11 +50,12 @@ bool CKDMBitwiseFlagTest::testFlagSmallUnsignedChar(){
 		throw std::logic_error(TEST_FUNCTION_NAME);
 	}
 
+	displaySuccess(TEST_FUNCTION_NAME);
 	return true;
 }
 
 bool CKDMBitwiseFlagTest::testFlagSmallInt(){
-	CKDMBitwiseFlag* testInstance = new CKDMBitwiseFlagSmall();
+	CKDMBitwiseFlag* testInstance = CKDMBitwiseFlagFactory::createFlag(CKDMBitwiseFlagFactory::FLAG_SMALL);
 
 	testInstance->set(FLAG_HARUKA);
 	testInstance->set(FLAG_CHIHAYA);
@@ -89,5 +76,6 @@ bool CKDMBitwiseFlagTest::testFlagSmallInt(){
 		throw std::logic_error(TEST_FUNCTION_NAME);
 	}
 
+	displaySuccess(TEST_FUNCTION_NAME);
 	return true;
 }

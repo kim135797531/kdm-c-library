@@ -1,7 +1,9 @@
 ﻿#ifndef KDM_AUTOTEST_ARRAY2D_TEST_H
 #define KDM_AUTOTEST_ARRAY2D_TEST_H
 
-class CKDMArray2DTest{
+#include "autotest-util.h"
+
+class CKDMArray2DTest : public CKDMAutotestBase{
 public:
 	bool testAll();
 	bool testSimple();
