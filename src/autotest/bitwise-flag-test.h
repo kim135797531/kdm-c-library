@@ -4,7 +4,8 @@
 class CKDMBitwiseFlagTest{
 public:
 	bool testAll();
-	bool testSimple();
+	bool testFlagSmallUnsignedChar();
+	bool testFlagSmallInt();
 private:
 };
 
