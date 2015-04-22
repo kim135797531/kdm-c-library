@@ -56,6 +56,10 @@ bool CKDMArray2DTest::testDoublePtr(){
 		throw std::logic_error(TEST_FUNCTION_NAME);
 	}
 
+	delete[] c_rgTestArray[0];
+	delete[] c_rgTestArray[1];
+	delete[] c_rgTestArray;
+
 	displaySuccess(TEST_FUNCTION_NAME);
 	return true;
 }

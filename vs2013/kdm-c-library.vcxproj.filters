@@ -39,9 +39,6 @@
     <ClCompile Include="..\src\library\bitwise-flag.cpp">
       <Filter>소스 파일\library</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\library\bitwise-flag-impl.cpp">
-      <Filter>소스 파일\library</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\kdm-main.h">
@@ -64,9 +61,6 @@
     </ClInclude>
     <ClInclude Include="..\src\autotest\bitwise-flag-test.h">
       <Filter>헤더 파일\autotest</Filter>
-    </ClInclude>
-    <ClInclude Include="..\src\library\bitwise-flag-impl.h">
-      <Filter>헤더 파일\library</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

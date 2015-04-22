@@ -14,7 +14,6 @@
     <ClCompile Include="..\src\autotest\array2d-test.cpp" />
     <ClCompile Include="..\src\autotest\bitwise-flag-test.cpp" />
     <ClCompile Include="..\src\kdm-main.cpp" />
-    <ClCompile Include="..\src\library\bitwise-flag-impl.cpp" />
     <ClCompile Include="..\src\library\bitwise-flag.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -24,7 +23,6 @@
     <ClInclude Include="..\src\kdm-main.h" />
     <ClInclude Include="..\src\library\array2d.h" />
     <ClInclude Include="..\src\library\array2d.hpp" />
-    <ClInclude Include="..\src\library\bitwise-flag-impl.h" />
     <ClInclude Include="..\src\library\bitwise-flag.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

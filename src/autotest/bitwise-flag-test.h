@@ -8,6 +8,7 @@ public:
 	bool testAll();
 	bool testFlagSmallUnsignedChar();
 	bool testFlagSmallInt();
+	bool testFlagLargeInt();
 private:
 };
 
