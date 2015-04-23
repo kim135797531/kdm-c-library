@@ -25,10 +25,10 @@ public:
 
 	//주어진 배열에 복사도 하고, 서비스로 그거 리턴도 해줌;
 	char* getData(char* p_szDest, int p_iStart, int p_iSize);
-	char* getRawData(){ return this->readAll(); }
+	char* getRawData(){ return readAll(); }
 		
-	char* operator()(char* p_szDest, int p_iStart, int p_iSize){ return this->getData(p_szDest, p_iStart, p_iSize); }
-	char* operator()(){ return this->getRawData(); }
+	char* operator()(char* p_szDest, int p_iStart, int p_iSize){ return getData(p_szDest, p_iStart, p_iSize); }
+	char* operator()(){ return getRawData(); }
 
 private:
 	char* readAll();
@@ -50,29 +50,35 @@ public:
 		WRITE_APPEND = 1
 	};
 public:
-	CKDMFileWrite(const char* p_szFileName, WriteMode p_eMode = WRITE_APPEND){ open(p_szFileName, p_eMode); }
+	CKDMFileWrite(){}
+	CKDMFileWrite(const char* p_szFileName, WriteMode p_eMode = WRITE_APPEND)
+		: m_eCurrentMode(p_eMode) { open(p_szFileName); }
 	~CKDMFileWrite(){ close(); }
 
-	void open(const char* p_szFileName, WriteMode p_eMode);
+	void open(const char* p_szFileName);
 	void close();
 
 	inline bool isOpen() const { return this->m_outputStream.is_open(); }
+	inline WriteMode getCurrentMode() const { return m_eCurrentMode; }
 	inline std::ofstream* getStream(){ return &(this->m_outputStream); }
 	inline const char* getFileName() const { return this->m_szFileName; }
 	
 	//현재 모드로 데이터 기록
-	bool writeData(const char* p_szSrc, int p_nFileSize);
-	bool writeData(const SKDMFile* p_KDMFile);
-	bool operator()(const char* p_szDest, int p_nFileSize){ return this->writeData(p_szDest, p_nFileSize); }
-	bool operator()(const SKDMFile* p_KDMFile){ return this->writeData(p_KDMFile->m_szRawData, p_KDMFile->m_nFileSize); }
+	void writeData(const char* p_szSrc, int p_nFileSize);
+	void writeData(const SKDMFile* p_KDMFile);
+	void operator()(const char* p_szDest, int p_nFileSize){ this->writeData(p_szDest, p_nFileSize); }
+	void operator()(const SKDMFile* p_KDMFile){ this->writeData(p_KDMFile->m_szRawData, p_KDMFile->m_nFileSize); }
+	void modifyData(const char* p_szSrc, int p_iStart, int p_iSize);
+	void flush(){ this->m_outputStream.flush(); };
 
-	bool changeMode(WriteMode p_eMode);
-
-	bool modifyData(const char* p_szSrc, int p_iStart, int p_iSize);
+	void changeMode(WriteMode p_eMode);	
 
 private:
-	bool writeDataTruncate(const char* p_szSrc);
-	bool writeDataAppend(const char* p_szSrc);
+	void writeDataTruncate(const char* p_szSrc, int p_nFileSize);
+	void writeDataTruncate(const SKDMFile* p_KDMFile);
+	void writeDataAppend(const char* p_szSrc, int p_nFileSize);
+	void writeDataAppend(const SKDMFile* p_KDMFile);
+	void reopenStream();
 
 	//스트림 복사 안되니까 이 클래스도 복사하면 안 됨!
 	CKDMFileWrite(const CKDMFileWrite&);
@@ -82,4 +88,5 @@ private:
 	std::ofstream m_outputStream;
 	WriteMode m_eCurrentMode;
 };
+
 #endif KDM_SRC_LIBRARY_FILE_READ_WRITE_H

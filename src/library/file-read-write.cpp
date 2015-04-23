@@ -21,9 +21,9 @@ void CKDMFileRead::open(const char* p_szFileName){
 void CKDMFileRead::close(){
 	if (isOpen())
 		this->m_inputStream.close();
-	if (m_file.m_szFileName != 0)
+	if (this->m_file.m_szFileName != 0)
 		delete this->m_file.m_szFileName;
-	if (m_file.m_szRawData != 0)
+	if (this->m_file.m_szRawData != 0)
 		delete this->m_file.m_szRawData;
 
 	this->m_file.m_nFileSize = -1;
@@ -66,4 +66,82 @@ char* CKDMFileRead::readRange(char* p_szDest, int p_iStart, int p_iSize){
 	this->m_inputStream.seekg(0, iCurIndex);
 
 	return p_szDest;
+}
+
+
+
+void CKDMFileWrite::open(const char* p_szFileName){
+	close();
+
+	this->m_szFileName = new char[strlen(p_szFileName) + 1];
+	memcpy(this->m_szFileName, p_szFileName, strlen(p_szFileName) + 1);
+
+	reopenStream();
+}
+
+void CKDMFileWrite::close(){
+	if (isOpen())
+		this->m_outputStream.close();
+	if (this->m_szFileName != 0)
+		delete this->m_szFileName;
+
+	this->m_szFileName = 0;
+}
+
+void CKDMFileWrite::writeData(const char* p_szSrc, int p_nFileSize){
+	this->m_outputStream.write(p_szSrc, p_nFileSize);
+}
+void CKDMFileWrite::writeData(const SKDMFile* p_KDMFile){
+	writeData(p_KDMFile->m_szRawData, p_KDMFile->m_nFileSize);
+}
+
+void CKDMFileWrite::changeMode(WriteMode p_eMode){
+	this->m_eCurrentMode = p_eMode;
+	reopenStream();
+}
+
+void CKDMFileWrite::modifyData(const char* p_szSrc, int p_iStart, int p_iSize){
+	int iCurIndex = static_cast<int>(this->m_outputStream.tellp());
+	this->m_outputStream.seekp(p_iStart);
+	this->m_outputStream.write(p_szSrc, p_iSize);
+	this->m_outputStream.seekp(0, iCurIndex);
+}
+
+void CKDMFileWrite::writeDataTruncate(const char* p_szSrc, int p_nFileSize){
+	WriteMode currentModeBackup = this->m_eCurrentMode;
+
+	if (this->m_eCurrentMode != WRITE_TRUNCATE)
+		changeMode(WRITE_TRUNCATE);
+
+	writeData(p_szSrc, p_nFileSize);
+	this->m_eCurrentMode = currentModeBackup;
+}
+
+void CKDMFileWrite::writeDataTruncate(const SKDMFile* p_KDMFile){
+	writeDataTruncate(p_KDMFile->m_szRawData, p_KDMFile->m_nFileSize);
+}
+
+void CKDMFileWrite::writeDataAppend(const char* p_szSrc, int p_nFileSize){
+	WriteMode currentModeBackup = this->m_eCurrentMode;
+
+	if (this->m_eCurrentMode != WRITE_APPEND)
+		changeMode(WRITE_APPEND);
+
+	writeData(p_szSrc, p_nFileSize);
+	this->m_eCurrentMode = currentModeBackup;
+}
+
+void CKDMFileWrite::writeDataAppend(const SKDMFile* p_KDMFile){
+	writeDataAppend(p_KDMFile->m_szRawData, p_KDMFile->m_nFileSize);
+}
+
+void CKDMFileWrite::reopenStream(){
+	std::ios_base::openmode mode = std::ios_base::binary;
+
+	if (m_eCurrentMode == WRITE_TRUNCATE)
+		mode |= std::ios_base::trunc;
+	else
+		mode |= std::ios_base::app;
+
+	this->m_outputStream = std::ofstream(m_szFileName, mode);
 }

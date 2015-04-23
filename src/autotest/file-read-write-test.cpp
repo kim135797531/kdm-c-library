@@ -6,7 +6,11 @@ bool CKDMReadWriteTest::testAll(){
 		testOpen();
 		testRead();
 		testReadRange();
-		testWrite();
+		testWriteOpen();
+		testWriteAppend();
+		testWriteTruncate();
+		testWriteChangeMode();
+		testWriteModify();
 	}
 	catch (std::logic_error &e){
 
@@ -56,6 +60,54 @@ bool CKDMReadWriteTest::testReadRange(){
 	return true;
 }
 
-bool CKDMReadWriteTest::testWrite(){
+bool CKDMReadWriteTest::testWriteOpen(){
+	CKDMFileWrite testInstance(TEST_CASE_DEST, CKDMFileWrite::WRITE_TRUNCATE);
+
+	if (testInstance.isOpen() == false){
+		throw std::logic_error(TEST_FUNCTION_NAME);
+	}
+
+	displaySuccess(TEST_FUNCTION_NAME);
+	return true;
+}
+bool CKDMReadWriteTest::testWriteAppend(){
+	//기본 생성자는 APPEND
+	CKDMFileWrite* testInstance;
+	testInstance = new CKDMFileWrite(TEST_CASE_DEST);
+
+	(*testInstance)("abc", 3);
+	testInstance->writeData("def", 3);
+
+	delete testInstance;
+
+	//다시 생성해서 append 테스트
+	testInstance = new CKDMFileWrite(TEST_CASE_DEST);
+
+	(*testInstance)("abc", 3);
+	testInstance->writeData("def", 3);
+
+	delete testInstance;
+
+	CKDMFileRead testInstance_read(TEST_CASE_DEST);
+	if (strncmp("abcdefabcdef", testInstance_read(), 12) != 0){
+		throw std::logic_error(TEST_FUNCTION_NAME);
+	}
+	
+	displaySuccess(TEST_FUNCTION_NAME);
+	return true;
+}
+bool CKDMReadWriteTest::testWriteTruncate(){
+	
+	displaySuccess(TEST_FUNCTION_NAME);
+	return true;
+}
+bool CKDMReadWriteTest::testWriteChangeMode(){
+
+	displaySuccess(TEST_FUNCTION_NAME);
+	return true;
+}
+bool CKDMReadWriteTest::testWriteModify(){
+
+	displaySuccess(TEST_FUNCTION_NAME);
 	return true;
 }

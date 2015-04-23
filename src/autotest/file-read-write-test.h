@@ -12,7 +12,11 @@ public:
 	bool testOpen();
 	bool testRead();
 	bool testReadRange();
-	bool testWrite();
+	bool testWriteOpen();
+	bool testWriteAppend();
+	bool testWriteTruncate();
+	bool testWriteChangeMode();
+	bool testWriteModify();
 private:
 };
 
