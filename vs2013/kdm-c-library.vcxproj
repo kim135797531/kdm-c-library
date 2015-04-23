@@ -13,17 +13,21 @@
   <ItemGroup>
     <ClCompile Include="..\src\autotest\array2d-test.cpp" />
     <ClCompile Include="..\src\autotest\bitwise-flag-test.cpp" />
+    <ClCompile Include="..\src\autotest\file-read-write-test.cpp" />
     <ClCompile Include="..\src\kdm-main.cpp" />
     <ClCompile Include="..\src\library\bitwise-flag.cpp" />
+    <ClCompile Include="..\src\library\file-read-write.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\autotest\array2d-test.h" />
     <ClInclude Include="..\src\autotest\autotest-util.h" />
     <ClInclude Include="..\src\autotest\bitwise-flag-test.h" />
+    <ClInclude Include="..\src\autotest\file-read-write-test.h" />
     <ClInclude Include="..\src\kdm-main.h" />
     <ClInclude Include="..\src\library\array2d.h" />
     <ClInclude Include="..\src\library\array2d.hpp" />
     <ClInclude Include="..\src\library\bitwise-flag.h" />
+    <ClInclude Include="..\src\library\file-read-write.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{8E09F22A-5390-4779-8089-FFCF754A9796}</ProjectGuid>

@@ -39,6 +39,12 @@
     <ClCompile Include="..\src\library\bitwise-flag.cpp">
       <Filter>소스 파일\library</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\library\file-read-write.cpp">
+      <Filter>소스 파일\library</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\autotest\file-read-write-test.cpp">
+      <Filter>소스 파일\autotest</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\kdm-main.h">
@@ -60,6 +66,12 @@
       <Filter>헤더 파일\library</Filter>
     </ClInclude>
     <ClInclude Include="..\src\autotest\bitwise-flag-test.h">
+      <Filter>헤더 파일\autotest</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\library\file-read-write.h">
+      <Filter>헤더 파일\library</Filter>
+    </ClInclude>
+    <ClInclude Include="..\src\autotest\file-read-write-test.h">
       <Filter>헤더 파일\autotest</Filter>
     </ClInclude>
   </ItemGroup>
