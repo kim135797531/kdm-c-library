@@ -41,8 +41,8 @@ char* CKDMFileRead::getData(char* p_tDest, int p_iStart, int p_iSize){
 char* CKDMFileRead::readAll(){
 	if (isOpen() != true)
 		throw std::logic_error("Error: File Not Opened");
-	if (this->m_file.m_tRawData == 0)
-		throw std::logic_error("Error: Data Not Found");
+	if (this->m_file.m_tRawData != 0)
+		return this->m_file.m_tRawData;
 
 	//파일 내용을 가져오기 위한 영역 확보
 	this->m_file.m_tRawData = new char[this->m_file.m_nFileSize];

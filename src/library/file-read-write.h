@@ -34,6 +34,10 @@ private:
 	char* readAll();
 	char* readRange(char* p_tDest, int p_iStart, int p_iSize);
 
+	//스트림 복사 안되니까 이 클래스도 복사하면 안 됨!
+	CKDMFileRead(const CKDMFileRead&);
+	CKDMFileRead& operator=(const CKDMFileRead&);
+
 	std::ifstream m_inputStream;
 	SKDMFile m_file;
 };

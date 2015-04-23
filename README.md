@@ -31,10 +31,23 @@ The repository to solve dirty problem on C++ programming.
 * Can be accessed with bitwise(unsigned char) or flag index.
 
 #### Usage
-1. Just write `#include 'bitwise-flag.h`.
+1. Just write `#include 'bitwise-flag.h'`.
 2. You can make bitwise flag instance with any size.
   * `CKDMBitwiseFlag awesomeFlags(200);` //200 Flags
 3. You can easily access to data.
-  * `awesomeFlags.setByBit(0x000000AA);` operation OR 0b10101010
-  * `awesomeFlags.setByIndex(3);` operation OR 0b00000100
-  * `awesomeFlags.setByBit(0x000000AA, 5);` operation OR 0b10101010 to address of fifth byte.
+  * `awesomeFlags.setByBit(0x000000AA);` //operation OR 0b10101010
+  * `awesomeFlags.setByIndex(3);` //operation OR 0b00000100
+  * `awesomeFlags.setByBit(0x000000AA, 5);` //operation OR 0b10101010 to address of fifth byte.
+
+---
+
+###CKDMFileRead
+* C++ file read control that manages the file data array automatically.
+
+#### Usage
+1. Just write `#include 'file-read-write.h'`.
+2. You can easily open the file.
+  * `CKDMFileRead awesomeFile("input.txt");` //open file
+3. You can easily read the data.
+  * `cout.write(awesomeFile(), awesomeFile.getFileSize());` //read all
+  * `char testDataDest[5]; awesomeFile(testDataDest, 13, 5);` //read data range of 13 ~ 17
