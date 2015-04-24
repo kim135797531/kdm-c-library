@@ -50,7 +50,7 @@ char* CKDMFileRead::readAll(){
 	int iCurIndex = static_cast<int>(this->m_inputStream.tellg());
 	this->m_inputStream.seekg(0, std::ifstream::beg);
 	this->m_inputStream.read(this->m_file.m_szRawData, sizeof(char)*this->m_file.m_nFileSize);
-	this->m_inputStream.seekg(0, iCurIndex);
+	this->m_inputStream.seekg(iCurIndex, std::ifstream::beg);
 
 	return m_file.m_szRawData;
 }
@@ -62,7 +62,7 @@ char* CKDMFileRead::readRange(char* p_szDest, int p_iStart, int p_iSize){
 	int iCurIndex = static_cast<int>(this->m_inputStream.tellg());
 	this->m_inputStream.seekg(p_iStart, std::ifstream::beg);
 	this->m_inputStream.read(p_szDest, sizeof(char)*p_iSize);
-	this->m_inputStream.seekg(0, iCurIndex);
+	this->m_inputStream.seekg(iCurIndex, std::ifstream::beg);
 
 	return p_szDest;
 }
@@ -101,9 +101,9 @@ void CKDMFileWrite::changeMode(WriteMode p_eMode){
 
 void CKDMFileWrite::modifyData(const char* p_szSrc, int p_iStart, int p_iSize){
 	int iCurIndex = static_cast<int>(this->m_outputStream.tellp());
-	this->m_outputStream.seekp(p_iStart);
+	this->m_outputStream.seekp(p_iStart, std::ofstream::beg);
 	this->m_outputStream.write(p_szSrc, p_iSize);
-	this->m_outputStream.seekp(iCurIndex);
+	this->m_outputStream.seekp(iCurIndex, std::ofstream::beg);
 }
 
 void CKDMFileWrite::writeDataTruncate(const char* p_szSrc, int p_nFileSize){
@@ -127,9 +127,9 @@ void CKDMFileWrite::writeDataAtEnd(const char* p_szSrc, int p_nFileSize){
 		changeMode(WRITE_ATEND);
 
 	int iCurIndex = static_cast<int>(this->m_outputStream.tellp());
-	this->m_outputStream.seekp(std::ofstream::end);
+	this->m_outputStream.seekp(0, std::ofstream::end);
 	this->m_outputStream.write(p_szSrc, p_nFileSize);
-	this->m_outputStream.seekp(iCurIndex);
+	this->m_outputStream.seekp(iCurIndex, std::ofstream::beg);
 }
 
 void CKDMFileWrite::writeDataAtEnd(const SKDMFile* p_KDMFile){
