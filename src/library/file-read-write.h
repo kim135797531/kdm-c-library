@@ -47,11 +47,11 @@ class CKDMFileWrite{
 public:
 	const enum WriteMode{
 		WRITE_TRUNCATE = 0,
-		WRITE_APPEND = 1
+		WRITE_ATEND = 1
 	};
 public:
 	CKDMFileWrite(){}
-	CKDMFileWrite(const char* p_szFileName, WriteMode p_eMode = WRITE_APPEND)
+	CKDMFileWrite(const char* p_szFileName, WriteMode p_eMode = WRITE_ATEND)
 		: m_eCurrentMode(p_eMode) { open(p_szFileName); }
 	~CKDMFileWrite(){ close(); }
 
@@ -76,8 +76,8 @@ public:
 private:
 	void writeDataTruncate(const char* p_szSrc, int p_nFileSize);
 	void writeDataTruncate(const SKDMFile* p_KDMFile);
-	void writeDataAppend(const char* p_szSrc, int p_nFileSize);
-	void writeDataAppend(const SKDMFile* p_KDMFile);
+	void writeDataAtEnd(const char* p_szSrc, int p_nFileSize);
+	void writeDataAtEnd(const SKDMFile* p_KDMFile);
 	void reopenStream();
 
 	//스트림 복사 안되니까 이 클래스도 복사하면 안 됨!

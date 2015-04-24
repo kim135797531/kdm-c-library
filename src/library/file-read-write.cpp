@@ -1,5 +1,4 @@
-﻿#include <iostream>
-#include "file-read-write.h"
+﻿#include "file-read-write.h"
 
 void CKDMFileRead::open(const char* p_szFileName){
 	close();
@@ -104,7 +103,7 @@ void CKDMFileWrite::modifyData(const char* p_szSrc, int p_iStart, int p_iSize){
 	int iCurIndex = static_cast<int>(this->m_outputStream.tellp());
 	this->m_outputStream.seekp(p_iStart);
 	this->m_outputStream.write(p_szSrc, p_iSize);
-	this->m_outputStream.seekp(0, iCurIndex);
+	this->m_outputStream.seekp(iCurIndex);
 }
 
 void CKDMFileWrite::writeDataTruncate(const char* p_szSrc, int p_nFileSize){
@@ -121,18 +120,20 @@ void CKDMFileWrite::writeDataTruncate(const SKDMFile* p_KDMFile){
 	writeDataTruncate(p_KDMFile->m_szRawData, p_KDMFile->m_nFileSize);
 }
 
-void CKDMFileWrite::writeDataAppend(const char* p_szSrc, int p_nFileSize){
+void CKDMFileWrite::writeDataAtEnd(const char* p_szSrc, int p_nFileSize){
 	WriteMode currentModeBackup = this->m_eCurrentMode;
 
-	if (this->m_eCurrentMode != WRITE_APPEND)
-		changeMode(WRITE_APPEND);
+	if (this->m_eCurrentMode != WRITE_ATEND)
+		changeMode(WRITE_ATEND);
 
-	writeData(p_szSrc, p_nFileSize);
-	this->m_eCurrentMode = currentModeBackup;
+	int iCurIndex = static_cast<int>(this->m_outputStream.tellp());
+	this->m_outputStream.seekp(std::ofstream::end);
+	this->m_outputStream.write(p_szSrc, p_nFileSize);
+	this->m_outputStream.seekp(iCurIndex);
 }
 
-void CKDMFileWrite::writeDataAppend(const SKDMFile* p_KDMFile){
-	writeDataAppend(p_KDMFile->m_szRawData, p_KDMFile->m_nFileSize);
+void CKDMFileWrite::writeDataAtEnd(const SKDMFile* p_KDMFile){
+	writeDataAtEnd(p_KDMFile->m_szRawData, p_KDMFile->m_nFileSize);
 }
 
 void CKDMFileWrite::reopenStream(){
@@ -141,7 +142,15 @@ void CKDMFileWrite::reopenStream(){
 	if (m_eCurrentMode == WRITE_TRUNCATE)
 		mode |= std::ios_base::trunc;
 	else
-		mode |= std::ios_base::app;
-
+		/*
+		binary | out은 자동으로 truncate 하도록 표준에 명시되어 있기 때문에 in도 해주어야 한다.
+		http://stackoverflow.com/questions/28999745/stdofstream-with-stdate-not-opening-at-end
+		*/
+		mode |= (
+		std::ios_base::in |
+		std::ios_base::out | 
+		std::ios_base::ate
+		);
+	
 	this->m_outputStream = std::ofstream(m_szFileName, mode);
 }

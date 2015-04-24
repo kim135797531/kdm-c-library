@@ -16,6 +16,7 @@ static void inline displaySuccess(const char* p_rgcInfo){
 
 class CKDMAutotestBase{
 public:
+	virtual ~CKDMAutotestBase(){};
 	virtual bool testAll() = 0;
 private:
 };
